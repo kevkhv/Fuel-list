@@ -12,6 +12,7 @@ class LutEntity(
     val id: Int,
     val month: String,
     val litresTotal: Int,
+    val residueLitres:Int,
     val startingMileage: Int,
     val endMileage: Int
 ) {
@@ -22,6 +23,7 @@ class LutEntity(
             id = id,
             month = month,
             litresTotal = litresTotal,
+            residueLitres = residueLitres,
             startingMileage = startingMileage,
             endMileage = endMileage
         )
@@ -30,6 +32,7 @@ class LutEntity(
             id = id,
             month = month,
             litresTotal = litresTotal,
+            residueLitres = residueLitres,
             startingMileage = startingMileage,
             endMileage = endMileage
         )

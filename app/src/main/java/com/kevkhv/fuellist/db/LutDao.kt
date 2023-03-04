@@ -20,6 +20,7 @@ interface LutDao {
             insert(lut)
         else updateContentById(lut.id,
             lut.month,
+            lut.residueLitres,
             lut.litresTotal,
             lut.startingMileage,
             lut.endMileage
@@ -29,13 +30,14 @@ interface LutDao {
         """UPDATE lutsTable SET
          month = :month, 
          litresTotal = :litresTotal,
+         residueLitres = :residueLitres,
          startingMileage = :startingMileage,
          endMileage = :endMileage
          WHERE id = :id
          """
     )
     fun updateContentById(
-        id: Int, month: String, litresTotal: Int, startingMileage: Int, endMileage: Int
+        id: Int, month: String, litresTotal: Int,residueLitres:Int, startingMileage: Int, endMileage: Int
     )
 
     @Query("DELETE FROM lutsTable WHERE id = :id")

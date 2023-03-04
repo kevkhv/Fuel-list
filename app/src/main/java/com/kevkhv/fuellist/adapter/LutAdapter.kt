@@ -11,6 +11,7 @@ import com.kevkhv.fuellist.dto.Lut
 interface OnInteractionListener {
     fun onEdit(lut: Lut){}
     fun onRemoveById(lut: Lut)
+    fun showAddFuelDialog(lutId: Int)
 }
 
 class LutAdapter(private val onInteractionListener:OnInteractionListener) :

@@ -10,12 +10,10 @@ import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.kevkhv.fuellist.R
 import com.kevkhv.fuellist.adapter.LutAdapter
 import com.kevkhv.fuellist.adapter.OnInteractionListener
-import com.kevkhv.fuellist.databinding.DialogStartBinding
 import com.kevkhv.fuellist.databinding.FragmentFeedBinding
 import com.kevkhv.fuellist.dto.Lut
 import com.kevkhv.fuellist.viewModel.ViewModel
@@ -34,6 +32,23 @@ class FeedFragment : Fragment() {
 
         override fun onRemoveById(lut: Lut) {
             viewModel.removeByID(lut.id)
+        }
+
+        override fun showAddFuelDialog(lutId:Int) {
+            val builder = AlertDialog.Builder(activity)
+            val dialogLayout = layoutInflater.inflate(R.layout.dialog_add_fuel, null)
+            val litresView = dialogLayout.findViewById<EditText>(R.id.litres)
+
+            with(builder) {
+                setPositiveButton("Ок") { dialog, which ->
+                    TODO()
+                }
+                setNegativeButton("Отмена") { dialog, which ->
+                    TODO()
+                }
+                setView(dialogLayout)
+                show()
+            }
         }
 
     })
@@ -81,10 +96,20 @@ class FeedFragment : Fragment() {
 
         with(builder) {
             setPositiveButton("Ок") { dialog, which ->
-                //TODO
+                viewModel.save(
+                    Lut(
+                        0,
+                        month = monthView.editText?.text.toString(),
+                        litresTotal = 0,
+                        residueLitres = Integer.parseInt(litresView.text.toString()),
+                        startingMileage = Integer.parseInt(startingMileageView.text.toString()),
+                        endMileage = 0
+                    )
+                )
             }
             setView(dialogLayout)
             show()
         }
     }
+
 }
