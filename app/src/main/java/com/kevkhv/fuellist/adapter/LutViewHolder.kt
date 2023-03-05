@@ -18,6 +18,9 @@ class LutViewHolder(
             textView2.text = "Пробег на конец периода: ${lut.endMileage}"
             textView3.text = "Заправлено литров: ${lut.litresTotal}"
             textView4.text = "расчет расхода"
+            addFuelButton.setOnClickListener {
+                onInteractionListener.showAddFuelDialog(lut.id)
+            }
             menuButton.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.options_lut)
@@ -39,3 +42,4 @@ class LutViewHolder(
         }
     }
 }
+

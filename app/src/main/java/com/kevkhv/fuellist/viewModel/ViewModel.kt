@@ -12,6 +12,7 @@ private val empty = Lut(
     id = 0,
     month = "",
     litresTotal = 0,
+    residueLitres = 0,
     startingMileage = 0,
     endMileage = 0
 )
