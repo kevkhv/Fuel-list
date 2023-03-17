@@ -1,4 +1,4 @@
-package com.kevkhv.fuellist.entity
+package com.kevkhv.fuellist.repository.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -4,14 +4,21 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.kevkhv.fuellist.db.LitersDao
 import com.kevkhv.fuellist.db.LutDao
-import com.kevkhv.fuellist.entity.LutEntity
+import com.kevkhv.fuellist.repository.entity.LitresEntity
+import com.kevkhv.fuellist.repository.entity.LutEntity
 
 
-
-@Database(entities = [LutEntity::class], version = 1)
+@Database(
+    entities = [
+        LutEntity::class,
+        LitresEntity::class
+    ], version = 1
+)
 abstract class AppDb : RoomDatabase() {
     abstract val lutDao: LutDao
+    abstract val litersDao: LitersDao
 
     companion object {
         @Volatile

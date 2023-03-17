@@ -3,6 +3,7 @@ package com.kevkhv.fuellist.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.kevkhv.fuellist.dto.Liters
 import com.kevkhv.fuellist.dto.Lut
 import com.kevkhv.fuellist.repository.LutRepository
 import com.kevkhv.fuellist.repository.LutRepositoryImpl
@@ -18,8 +19,11 @@ private val empty = Lut(
 )
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: LutRepository =
-        LutRepositoryImpl(dao = AppDb.getInstance(context = application).lutDao)
+//    private val repository: LutRepository =
+//        LutRepositoryImpl(dao = AppDb.getInstance(context = application).lutDao)
+
+
+    private val repository: LutRepository = LutRepositoryImpl(application)
 
     val data = repository.get()
 
@@ -32,6 +36,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     fun edit(lut: Lut) {
         edited.value = lut
     }
+
+    fun addLiters(liters: Liters) = repository.addLiters(liters)
 
 
 }

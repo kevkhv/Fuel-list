@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.kevkhv.fuellist.dto.Lut
-import com.kevkhv.fuellist.entity.LutEntity
+import com.kevkhv.fuellist.repository.entity.LutEntity
 
 @Dao
 interface LutDao {
@@ -18,7 +18,8 @@ interface LutDao {
     fun save(lut: LutEntity) =
         if (lut.id == 0)
             insert(lut)
-        else updateContentById(lut.id,
+        else updateContentById(
+            lut.id,
             lut.month,
             lut.residueLitres,
             lut.litresTotal,
@@ -37,9 +38,17 @@ interface LutDao {
          """
     )
     fun updateContentById(
-        id: Int, month: String, litresTotal: Int,residueLitres:Int, startingMileage: Int, endMileage: Int
+        id: Int,
+        month: String,
+        litresTotal: Int,
+        residueLitres: Int,
+        startingMileage: Int,
+        endMileage: Int
     )
 
     @Query("DELETE FROM lutsTable WHERE id = :id")
     fun removeById(id: Int)
+
+    @Query("UPDATE lutsTable SET litresTotal = (SELECT SUM(liters_count) FROM liters_table WHERE lut_id=:id) ")
+    fun updateAllLiters(id: Int)
 }

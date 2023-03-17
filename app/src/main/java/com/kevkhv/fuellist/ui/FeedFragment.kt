@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.textfield.TextInputLayout
@@ -15,6 +16,7 @@ import com.kevkhv.fuellist.R
 import com.kevkhv.fuellist.adapter.LutAdapter
 import com.kevkhv.fuellist.adapter.OnInteractionListener
 import com.kevkhv.fuellist.databinding.FragmentFeedBinding
+import com.kevkhv.fuellist.dto.Liters
 import com.kevkhv.fuellist.dto.Lut
 import com.kevkhv.fuellist.viewModel.ViewModel
 
@@ -41,10 +43,10 @@ class FeedFragment : Fragment() {
 
             with(builder) {
                 setPositiveButton("Ок") { dialog, which ->
-                    TODO()
+                   viewModel.addLiters(Liters(0,lutId,Integer.parseInt(litresView.text.toString()),"date"))
                 }
                 setNegativeButton("Отмена") { dialog, which ->
-                    TODO()
+                    Toast.makeText(requireContext(),"CLOSE",12).show()
                 }
                 setView(dialogLayout)
                 show()
