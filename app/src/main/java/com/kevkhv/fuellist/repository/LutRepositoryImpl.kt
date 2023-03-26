@@ -5,9 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.kevkhv.fuellist.dto.Liters
 import com.kevkhv.fuellist.dto.Lut
+import com.kevkhv.fuellist.repository.entity.LitersEntity
 import com.kevkhv.fuellist.repository.entity.LutEntity.Companion.toEntity
 import com.kevkhv.fuellist.repository.entity.LutEntity.Companion.toModel
-import com.kevkhv.fuellist.repository.entity.toLitresEntity
+import com.kevkhv.fuellist.repository.entity.toLiters
+import com.kevkhv.fuellist.repository.entity.toLitersEntity
 import ru.netology.nmedia.db.AppDb
 
 class LutRepositoryImpl(
@@ -26,9 +28,14 @@ class LutRepositoryImpl(
     override fun save(lut: Lut) = dao.save(lut.toEntity())
 
     override fun removeByID(lutId: Int) = dao.removeById(lutId)
+
     override fun addLiters(liters: Liters) {
-        litersDao.insertLiters(liters.toLitresEntity())
+        litersDao.insertLiters(liters.toLitersEntity())
         dao.updateAllLiters(liters.lutId)
+    }
+
+    override fun getLitersListFromDb(id: Int): LiveData<List<Liters>> {
+       return litersDao.getLitersList(id).map { list: List<LitersEntity> -> list.map { LitersEntity -> LitersEntity.toLiters() } }
     }
 
 

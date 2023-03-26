@@ -17,7 +17,7 @@ import com.kevkhv.fuellist.dto.Liters
             onUpdate = ForeignKey.CASCADE
         )]
 )
-data class LitresEntity(
+data class LitersEntity(
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     val id: Int,
@@ -29,14 +29,14 @@ data class LitresEntity(
     val date: String
 )
 
-fun LitresEntity.toLiters() = Liters(
+fun LitersEntity.toLiters() = Liters(
     id = id,
     lutId = lutId,
     litersCount = litersCount,
     date = date
 )
 
-fun Liters.toLitresEntity() = LitresEntity(
+fun Liters.toLitersEntity() = LitersEntity(
     id = id,
     lutId = lutId,
     litersCount = litersCount,

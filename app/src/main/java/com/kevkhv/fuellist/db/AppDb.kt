@@ -6,14 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.kevkhv.fuellist.db.LitersDao
 import com.kevkhv.fuellist.db.LutDao
-import com.kevkhv.fuellist.repository.entity.LitresEntity
+import com.kevkhv.fuellist.repository.entity.LitersEntity
 import com.kevkhv.fuellist.repository.entity.LutEntity
 
 
 @Database(
     entities = [
         LutEntity::class,
-        LitresEntity::class
+        LitersEntity::class
     ], version = 1
 )
 abstract class AppDb : RoomDatabase() {

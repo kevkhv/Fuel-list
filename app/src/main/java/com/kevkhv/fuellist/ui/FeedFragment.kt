@@ -16,10 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputLayout
 import com.kevkhv.fuellist.R
-import com.kevkhv.fuellist.adapter.LitersAdapter
-import com.kevkhv.fuellist.adapter.LitersViewHolder
-import com.kevkhv.fuellist.adapter.LutAdapter
-import com.kevkhv.fuellist.adapter.OnInteractionListener
+import com.kevkhv.fuellist.adapter.*
 import com.kevkhv.fuellist.databinding.FragmentFeedBinding
 import com.kevkhv.fuellist.dto.Liters
 import com.kevkhv.fuellist.dto.Lut
@@ -29,19 +26,18 @@ import com.kevkhv.fuellist.viewModel.ViewModel
 class FeedFragment : Fragment() {
     private lateinit var dialog: BottomSheetDialog
     private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: FragmentFeedBinding
     val viewModel: ViewModel by viewModels(ownerProducer = ::requireParentFragment)
-    lateinit var binding: FragmentFeedBinding
 
 
-    private val adapter = LutAdapter(object : OnInteractionListener<Lut> {
-
-        override fun onEdit(lut: Lut) {
+    private val adapter = LutAdapter(object : LutInteractionListener {
+        override fun onLutEditClicked(lut: Lut) {
             viewModel.edit(lut)
 //            findNavController().navigate(
 //                Bundle().apply { idArg = lut.id })
         }
 
-        override fun onRemoveById(lut: Lut) {
+        override fun onLutRemoveClicked(lut: Lut) {
             viewModel.removeByID(lut.id)
         }
 
@@ -68,22 +64,14 @@ class FeedFragment : Fragment() {
                 show()
             }
         }
-
-        override fun showBottomSheet(lutId: Int) {
-            Log.d("tesstt",lutId.toString())
-            showBottomSheet()
+        override fun showBottomSheetWithLiters(lutId: Int) {
+            showBottomSheet(lutId)
         }
 
     }
 
-
     )
 
-//
-//    val lut1 = Lut(0,"Май",20,0,100)
-//    val lut2 = Lut(0,"Апрель",10,100,200)
-//    val lut3 = Lut(0,"Июнь",25,200,500)
-//    val lut4 = Lut(0,"Июль",22,500,600)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -120,7 +108,7 @@ class FeedFragment : Fragment() {
 
     }
 
-    fun showStartDialog() {
+    private fun showStartDialog() {
         val builder = AlertDialog.Builder(activity)
         val dialogLayout = layoutInflater.inflate(R.layout.dialog_start, null)
         val monthView = dialogLayout.findViewById<TextInputLayout>(R.id.selectMonth)
@@ -148,39 +136,30 @@ class FeedFragment : Fragment() {
             show()
         }
     }
-    private fun showBottomSheet() {
+
+    private fun showBottomSheet(lutId: Int) {
         val dialogView = layoutInflater.inflate(R.layout.liters_list_fragment, null)
         val removeButton = dialogView.findViewById<View>(R.id.removeLine)
-        val litersAdapter = LitersAdapter(object : OnInteractionListener<Liters> {
-            override fun onRemoveById(lut: Liters) {
-                TODO("Not yet implemented")
-            }
-
-            override fun showAddFuelDialog(lutId: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun showBottomSheet(lutId: Int) {
-                TODO("Not yet implemented")
-            }
-
-
-        })
-
         dialog = BottomSheetDialog(requireContext(), R.style.MyBottomSheetDialogTheme)
         dialog.setContentView(dialogView)
         recyclerView = dialogView.findViewById(R.id.recyclerChoice)
 
+        val litersAdapter = LitersAdapter(object : LitersInteractionListener {
+            override fun onLitersEditClicked(liters: Liters) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onLitersRemoveClicked(liters: Liters) {
+                TODO("Not yet implemented")
+            }
+        })
+
         recyclerView.adapter = litersAdapter
-
-        val testLiters = arrayListOf(Liters(1,2,44,"22"))
-        litersAdapter.submitList(testLiters)
-
-
-//        viewModel.data.value.let { litersAdapter.submitList(it) }
+        viewModel.getLitersListLiveData(lutId).observe(viewLifecycleOwner) {
+            litersAdapter.submitList(it)
+        }
 
         dialog.show()
-
         removeButton.setOnClickListener {
             dialog.hide()
         }

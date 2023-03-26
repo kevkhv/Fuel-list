@@ -7,10 +7,18 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kevkhv.fuellist.databinding.CardLitersBinding
 import com.kevkhv.fuellist.dto.Liters
+import com.kevkhv.fuellist.dto.Lut
+
+
+interface LitersInteractionListener {
+    fun onLitersEditClicked(liters: Liters)
+    fun onLitersRemoveClicked(liters: Liters)
+}
 
 
 class LitersAdapter(
-    private val onInteractionListener: OnInteractionListener<Liters>
+    private val onInteractionListener:
+    LitersInteractionListener
 ) :
     androidx.recyclerview.widget.ListAdapter<Liters, LitersViewHolder>(DiffCallback) {
 
@@ -39,10 +47,14 @@ class LitersAdapter(
 
 class LitersViewHolder(
     private val binding: CardLitersBinding,
-    private val onInteractionListener: OnInteractionListener<Liters>
+    private val onInteractionListener: LitersInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(liters: Liters){
-        binding.countLiters.text = liters.litersCount.toString()
+    fun bind(liters: Liters) {
+        with(binding) {
+            countLiters.text = liters.litersCount.toString()
+            dateFul.text = liters.date.toString()
+        }
+
     }
 }

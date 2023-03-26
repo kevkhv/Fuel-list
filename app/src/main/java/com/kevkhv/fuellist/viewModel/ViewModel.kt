@@ -2,6 +2,7 @@ package com.kevkhv.fuellist.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kevkhv.fuellist.dto.Liters
 import com.kevkhv.fuellist.dto.Lut
@@ -38,6 +39,10 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun addLiters(liters: Liters) = repository.addLiters(liters)
+
+    fun getLitersListLiveData(id: Int): LiveData<List<Liters>> {
+        return repository.getLitersListFromDb(id)
+    }
 
 
 }

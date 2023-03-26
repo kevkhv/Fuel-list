@@ -9,4 +9,5 @@ interface LutRepository {
     fun save(lut: Lut)
     fun removeByID(lutId: Int)
     fun addLiters(liters: Liters)
+   fun getLitersListFromDb(id: Int): LiveData<List<Liters>>
 }
