@@ -8,18 +8,22 @@ import androidx.recyclerview.widget.ListAdapter
 import com.kevkhv.fuellist.databinding.CardLutBinding
 import com.kevkhv.fuellist.dto.Lut
 
-interface OnInteractionListener {
-    fun onEdit(lut: Lut){}
-    fun onRemoveById(lut: Lut)
+interface OnInteractionListener<T> {
+    fun onEdit(lut: T) {}
+    fun onRemoveById(lut: T)
     fun showAddFuelDialog(lutId: Int)
+    fun showBottomSheet(lutId:Int)
+
 }
 
-class LutAdapter(private val onInteractionListener:OnInteractionListener) :
+class LutAdapter(
+    private val onInteractionListener: OnInteractionListener<Lut>
+) :
     ListAdapter<Lut, LutViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LutViewHolder {
         val binding = CardLutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return LutViewHolder(binding,onInteractionListener)
+        return LutViewHolder(binding, onInteractionListener)
     }
 
     override fun onBindViewHolder(holder: LutViewHolder, position: Int) {

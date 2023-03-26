@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomMenuVerticalLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/dateFulTitle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Дата заправки"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/dateFul"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/countLitersTitle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Кол-во литров"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/countLiters"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateFul" />
+
+        <TextView
+            android:id="@+id/dateFul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10.10.23"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dateFulTitle" />
+
+        <TextView
+            android:id="@+id/countLiters"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="40"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateFul" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
+
+
