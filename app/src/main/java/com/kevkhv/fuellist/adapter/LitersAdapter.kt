@@ -1,13 +1,16 @@
 package com.kevkhv.fuellist.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kevkhv.fuellist.databinding.CardLitersBinding
 import com.kevkhv.fuellist.dto.Liters
-import com.kevkhv.fuellist.dto.Lut
+import com.kevkhv.fuellist.R
 
 
 interface LitersInteractionListener {
@@ -54,7 +57,29 @@ class LitersViewHolder(
         with(binding) {
             countLiters.text = liters.litersCount.toString()
             dateFul.text = liters.date.toString()
-        }
 
+            itemView.setOnLongClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_lut)
+                    setOnMenuItemClickListener {
+                        when (it.itemId) {
+                            R.id.remove -> {
+                                Log.d("click", "you click del")
+                                //TODO Confirmation remove
+                                true
+                            }
+                            R.id.edit -> {
+                                Log.d("click", "you click edit")
+                                true
+                            }
+                            else -> {
+                                false
+                            }
+                        }
+                    }
+                }.show()
+                true
+            }
+        }
     }
 }

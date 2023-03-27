@@ -21,6 +21,8 @@ import com.kevkhv.fuellist.databinding.FragmentFeedBinding
 import com.kevkhv.fuellist.dto.Liters
 import com.kevkhv.fuellist.dto.Lut
 import com.kevkhv.fuellist.viewModel.ViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class FeedFragment : Fragment() {
@@ -45,6 +47,7 @@ class FeedFragment : Fragment() {
             val builder = AlertDialog.Builder(activity)
             val dialogLayout = layoutInflater.inflate(R.layout.dialog_add_fuel, null)
             val litresView = dialogLayout.findViewById<EditText>(R.id.litres)
+            val date = SimpleDateFormat("dd/M/yyyy", Locale.US).format(Date())
 
             with(builder) {
                 setPositiveButton("Ок") { dialog, which ->
@@ -53,7 +56,7 @@ class FeedFragment : Fragment() {
                             0,
                             lutId,
                             Integer.parseInt(litresView.text.toString()),
-                            "date"
+                            date
                         )
                     )
                 }
@@ -94,17 +97,8 @@ class FeedFragment : Fragment() {
                     adapter.submitList(luts)
             }
         }
-        //TODO HERE
-//        val recyclerViewLiters = view?.findViewById<RecyclerView>(R.id.recyclerListLiters)
-//
-//        val testLit  = arrayListOf<Liters>(Liters(1,1,11,"11111"))
-//
-//        recyclerViewLiters?.adapter = litersAdapter
-//
-//        litersAdapter.submitList(testLit)
 
         return binding.root
-
 
     }
 
