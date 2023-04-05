@@ -25,7 +25,10 @@ class LutRepositoryImpl(
         entities.map { it.toModel() }
     }
 
-    override fun save(lut: Lut) = dao.save(lut.toEntity())
+    override fun saveLut(lut: Lut) = dao.insert(lut.toEntity())
+    override fun updateLut(id: Int,month: String, startingMileage: Int, residueLitres: Int) =
+        dao.updateLut(id, month, startingMileage, residueLitres)
+
 
     override fun removeByID(lutId: Int) = dao.removeById(lutId)
 
@@ -35,8 +38,11 @@ class LutRepositoryImpl(
     }
 
     override fun getLitersListFromDb(id: Int): LiveData<List<Liters>> {
-       return litersDao.getLitersList(id).map { list: List<LitersEntity> -> list.map { LitersEntity -> LitersEntity.toLiters() } }
+        return litersDao.getLitersList(id)
+            .map { list: List<LitersEntity> -> list.map { LitersEntity -> LitersEntity.toLiters() } }
     }
+
+    override fun updateEndMileage(lutId: Int, endMileage: Int) = dao.updateEndMileage(lutId,endMileage)
 
 
 }

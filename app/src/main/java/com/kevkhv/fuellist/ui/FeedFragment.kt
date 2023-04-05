@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.kevkhv.fuellist.R
 import com.kevkhv.fuellist.adapter.*
@@ -34,9 +35,7 @@ class FeedFragment : Fragment() {
 
     private val adapter = LutAdapter(object : LutInteractionListener {
         override fun onLutEditClicked(lut: Lut) {
-            viewModel.edit(lut)
-//            findNavController().navigate(
-//                Bundle().apply { idArg = lut.id })
+            viewModel.editLut(lut)
         }
 
         override fun onLutRemoveClicked(lut: Lut) {
@@ -67,13 +66,33 @@ class FeedFragment : Fragment() {
                 show()
             }
         }
+
         override fun showBottomSheetWithLiters(lutId: Int) {
             showBottomSheet(lutId)
         }
 
-    }
+        override fun showAddMileageDialog(lut: Lut) {
+            val builder = AlertDialog.Builder(activity)
+            val dialogLayout = layoutInflater.inflate(R.layout.dialog_add_end_mileage, null)
+            val endMileage = dialogLayout.findViewById<EditText>(R.id.endMileage)
 
-    )
+
+            with(builder) {
+                setTitle("Пробег")
+
+                setMessage(resources.getString(R.string.endMil))
+
+                setNegativeButton("Отмена") { dialog, which ->
+                    // Respond to negative button press
+                }
+                setPositiveButton("Ок") { dialog, which ->
+                    viewModel.addEndMileage(lut.id, Integer.parseInt(endMileage.text.toString()))
+                }
+                setView(dialogLayout)
+                    .show()
+            }
+        }
+    })
 
 
     override fun onCreateView(
@@ -82,27 +101,27 @@ class FeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFeedBinding.inflate(layoutInflater)
-//        viewModel.save(lut1)
-//        viewModel.save(lut2)
-//        viewModel.save(lut3)
-//        viewModel.save(lut4)
+
         with(binding) {
-
             listView.adapter = adapter
-
             viewModel.data.observe(viewLifecycleOwner) { luts ->
                 if (luts.isEmpty()) {
-                    showStartDialog()
+                    showStartDialog(null)
                 } else
                     adapter.submitList(luts)
             }
+        }
+
+        viewModel.editedLut.observe(viewLifecycleOwner) {
+            it?.let { showStartDialog(it) }
         }
 
         return binding.root
 
     }
 
-    private fun showStartDialog() {
+    private fun showStartDialog(editedLut: Lut?) {
+
         val builder = AlertDialog.Builder(activity)
         val dialogLayout = layoutInflater.inflate(R.layout.dialog_start, null)
         val monthView = dialogLayout.findViewById<TextInputLayout>(R.id.selectMonth)
@@ -112,12 +131,18 @@ class FeedFragment : Fragment() {
         val startingMileageView = dialogLayout.findViewById<EditText>(R.id.start)
         val litresView = dialogLayout.findViewById<EditText>(R.id.litres)
 
+        editedLut?.let {
+            monthView.editText?.setText(it.month)
+            startingMileageView.setText(it.startingMileage.toString())
+            litresView.setText(it.residueLitres.toString())
+        }
 
         with(builder) {
+
             setPositiveButton("Ок") { dialog, which ->
                 viewModel.save(
                     Lut(
-                        0,
+                        id = editedLut?.id ?: 0,
                         month = monthView.editText?.text.toString(),
                         litresTotal = 0,
                         residueLitres = Integer.parseInt(litresView.text.toString()),
@@ -126,9 +151,11 @@ class FeedFragment : Fragment() {
                     )
                 )
             }
+            setOnCancelListener { viewModel.resetEditLut() }
             setView(dialogLayout)
             show()
         }
+
     }
 
     private fun showBottomSheet(lutId: Int) {

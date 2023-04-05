@@ -8,6 +8,7 @@ import com.kevkhv.fuellist.dto.Liters
 import com.kevkhv.fuellist.dto.Lut
 import com.kevkhv.fuellist.repository.LutRepository
 import com.kevkhv.fuellist.repository.LutRepositoryImpl
+import com.kevkhv.fuellist.util.SingleLiveEvent
 import ru.netology.nmedia.db.AppDb
 
 private val empty = Lut(
@@ -28,14 +29,22 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
     val data = repository.get()
 
-    val edited = MutableLiveData(empty)
+    val editedLut = MutableLiveData<Lut?>()
 
-    fun save(lut: Lut) = repository.save(lut)
+    fun save(lut: Lut) {
+        if (lut.id != 0) repository.updateLut(
+            lut.id,
+            lut.month,
+            lut.startingMileage,
+            lut.residueLitres
+        ) else repository.saveLut(lut)
+        resetEditLut()
+    }
 
     fun removeByID(lutId: Int) = repository.removeByID(lutId)
 
-    fun edit(lut: Lut) {
-        edited.value = lut
+    fun editLut(lut: Lut) {
+        editedLut.value = lut
     }
 
     fun addLiters(liters: Liters) = repository.addLiters(liters)
@@ -44,5 +53,10 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return repository.getLitersListFromDb(id)
     }
 
+    fun addEndMileage(lutId: Int, endMileage: Int) = repository.updateEndMileage(lutId,endMileage)
+
+    fun resetEditLut() {
+        editedLut.value = null
+    }
 
 }
