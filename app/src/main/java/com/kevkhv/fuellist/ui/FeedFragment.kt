@@ -92,6 +92,10 @@ class FeedFragment : Fragment() {
                     .show()
             }
         }
+
+        override fun onClickRoot() {
+            Log.d("ebat", "i click root")
+        }
     })
 
 
@@ -114,6 +118,21 @@ class FeedFragment : Fragment() {
 
         viewModel.editedLut.observe(viewLifecycleOwner) {
             it?.let { showStartDialog(it) }
+        }
+
+        binding.listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+        }
+        )
+
+        // binding.root.setOnClickListener { Log.d("ebat", "i click root") }
+        binding.extendedFab.setOnClickListener {
+            with(binding) {
+                extendedFab.extend()
+                extendedFab.setOnClickListener {
+                    showStartDialog(null)
+                }
+            }
         }
 
         return binding.root

@@ -17,7 +17,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Дата заправки"
-            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/dateFul"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -26,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Кол-во литров"
-            android:textStyle="bold"
+
             app:layout_constraintEnd_toStartOf="@id/countLiters"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dateFul" />
@@ -35,7 +34,6 @@
             android:id="@+id/dateFul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10.10.23"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/dateFulTitle" />
@@ -45,7 +43,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="40"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dateFul" />
 

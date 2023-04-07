@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AbsListView.OnScrollListener
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -20,6 +21,7 @@ interface LutInteractionListener {
     fun showAddFuelDialog(lutId: Int)
     fun showBottomSheetWithLiters(lutId: Int)
     fun showAddMileageDialog(lut: Lut)
+    fun onClickRoot()
 
 }
 
@@ -51,6 +53,7 @@ class LutAdapter(
 class LutViewHolder(
     private val binding: CardLutBinding,
     private val onInteractionListener: LutInteractionListener
+
 ) : RecyclerView.ViewHolder(binding.root) {
 
 
@@ -60,6 +63,7 @@ class LutViewHolder(
             textView.text = "Пробег на начало периода: ${lut.startingMileage}"
             textView2.text = "Пробег на конец периода: ${lut.endMileage}"
             textView3.text = "Заправлено литров: ${lut.litresTotal}"
+            mileagePeriod.mileagePeriod(lut)
             textView4.switchColor(lut)
             showLitersList.setOnClickListener {
                 onInteractionListener.showBottomSheetWithLiters(lut.id)
@@ -73,6 +77,7 @@ class LutViewHolder(
             textView2.setOnClickListener {
                 onInteractionListener.showAddMileageDialog(lut)
             }
+
 
 
 
@@ -112,6 +117,13 @@ class LutViewHolder(
             text = "Расчет расхода:  N/A"
 
         }
+    }
+
+    private fun TextView.mileagePeriod(lut: Lut) {
+        val mileagePeriod = if (lut.endMileage > 0 && lut.startingMileage > 0) {
+            (lut.endMileage - lut.startingMileage).toString()
+        } else "N/A"
+        text = "Пробег за перод: $mileagePeriod"
     }
 
     private fun roundDouble(double: Double): Double {
