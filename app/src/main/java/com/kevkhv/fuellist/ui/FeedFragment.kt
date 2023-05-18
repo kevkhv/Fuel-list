@@ -127,12 +127,7 @@ class FeedFragment : Fragment() {
 
         // binding.root.setOnClickListener { Log.d("ebat", "i click root") }
         binding.extendedFab.setOnClickListener {
-            with(binding) {
-                extendedFab.extend()
-                extendedFab.setOnClickListener {
-                    showStartDialog(null)
-                }
-            }
+            showStartDialog(null)
         }
 
         return binding.root

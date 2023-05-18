@@ -43,4 +43,7 @@ interface LutDao {
 
     @Query("UPDATE lutsTable SET endMileage =:endMileage WHERE id =:lutId")
     fun updateEndMileage(lutId: Int, endMileage: Int)
+
+    @Query("SELECT * FROM lutsTable WHERE id LIKE :idLut")
+    fun getLutById(idLut: Int): LutEntity
 }
