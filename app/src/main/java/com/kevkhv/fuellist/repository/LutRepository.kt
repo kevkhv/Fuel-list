@@ -11,7 +11,8 @@ interface LutRepository {
     fun removeByID(lutId: Int)
     fun addLiters(liters: Liters)
     fun getLitersListFromDb(id: Int): LiveData<List<Liters>>
-    fun updateEndMileage(lutId: Int, endMileage:Int)
+    fun updateEndMileage(lutId: Int, endMileage: Int)
+    fun getLastLutFromDb():Int
 
 
 }

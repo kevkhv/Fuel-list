@@ -58,5 +58,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     fun resetEditLut() {
         editedLut.value = null
     }
+    fun getLastLutFromD():Int{
+        return repository.getLastLutFromDb()
+    }
 
 }

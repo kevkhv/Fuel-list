@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.kevkhv.fuellist.R
@@ -110,14 +112,14 @@ class FeedFragment : Fragment() {
             listView.adapter = adapter
             viewModel.data.observe(viewLifecycleOwner) { luts ->
                 if (luts.isEmpty()) {
-                    showStartDialog(null)
+                    showStartDialog(null, null)
                 } else
                     adapter.submitList(luts)
             }
         }
 
         viewModel.editedLut.observe(viewLifecycleOwner) {
-            it?.let { showStartDialog(it) }
+            it?.let { showStartDialog(it, null) }
         }
 
         binding.listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -127,14 +129,14 @@ class FeedFragment : Fragment() {
 
         // binding.root.setOnClickListener { Log.d("ebat", "i click root") }
         binding.extendedFab.setOnClickListener {
-            showStartDialog(null)
+            showStartDialog(null, viewModel.getLastLutFromD())
         }
 
         return binding.root
 
     }
 
-    private fun showStartDialog(editedLut: Lut?) {
+    private fun showStartDialog(editedLut: Lut?, startingMileage: Int?) {
 
         val builder = AlertDialog.Builder(activity)
         val dialogLayout = layoutInflater.inflate(R.layout.dialog_start, null)
@@ -144,12 +146,29 @@ class FeedFragment : Fragment() {
         (monthView.editText as? AutoCompleteTextView)?.setAdapter(adapter)
         val startingMileageView = dialogLayout.findViewById<EditText>(R.id.start)
         val litresView = dialogLayout.findViewById<EditText>(R.id.litres)
+        val chipWinterTest = dialogLayout.findViewById<Chip>(R.id.winterTest)
+
 
         editedLut?.let {
             monthView.editText?.setText(it.month)
             startingMileageView.setText(it.startingMileage.toString())
             litresView.setText(it.residueLitres.toString())
         }
+
+        startingMileage?.let {
+            startingMileageView.setText(startingMileage.toString())
+        }
+
+
+        chipWinterTest.setOnClickListener {
+            var test = chipWinterTest.isChecked
+            Log.d("isChecked", test.toString())
+
+
+
+        }
+
+
 
         with(builder) {
 

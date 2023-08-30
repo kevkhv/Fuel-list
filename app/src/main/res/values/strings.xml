@@ -15,10 +15,12 @@
     <string name="month_november">Ноябрь</string>
     <string name="month_december">Декабрь</string>
     <string name="month">Месяц</string>\
-    <string name="endMil">Введите пробег на конец периода</string>
-    <string name="mileagePeriod">Пробег за период</string>
+    <string name="endMil">Введите пробег на конец месяца:</string>
+    <string name="mileagePeriod">Пробег за месяц:</string>
+    <string name="remaining">Остакток в баке:</string>
 
 
-    Mileage Period
+
+
 
 </resources>

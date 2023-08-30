@@ -52,6 +52,13 @@
 
     </style>
 
+    <style name="Widget.AppTheme.MyChips" parent="@style/Widget.MaterialComponents.Chip.Action">
+        <item name="android:checkable">true</item>
+        <item name="checkedIconVisible">false</item>
+
+
+    </style>
+
 
 
 </resources>

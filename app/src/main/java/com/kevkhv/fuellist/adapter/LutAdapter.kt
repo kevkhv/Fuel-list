@@ -58,11 +58,14 @@ class LutViewHolder(
 
 
     fun bind(lut: Lut) {
+
+
         binding.apply {
             titleView.text = lut.month
-            textView.text = "Пробег на начало периода: ${lut.startingMileage}"
-            textView2.text = "Пробег на конец периода: ${lut.endMileage}"
-            textView3.text = "Заправлено литров: ${lut.litresTotal}"
+            textView.text = "Пробег на начало месяца: ${lut.startingMileage}"
+            textView2.text = "Пробег на конец месяца: ${lut.endMileage}"
+            remaining.text = "Остакток в баке: ${lut.residueLitres}"
+                textView3.text = "Заправлено литров: ${lut.litresTotal}"
             mileagePeriod.mileagePeriod(lut)
             textView4.switchColor(lut)
             showLitersList.setOnClickListener {
@@ -104,8 +107,11 @@ class LutViewHolder(
     }
 
     private fun TextView.switchColor(lut: Lut) {
+
         if (lut.endMileage > 0 && lut.litresTotal > 0) {
             val standart =
+
+
                 (lut.litresTotal + lut.residueLitres) * 100 / (lut.endMileage - lut.startingMileage).toDouble()
             text = "Расчет расхода:  ${roundDouble(standart)}"
             setTextColor(
