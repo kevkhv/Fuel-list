@@ -72,41 +72,4 @@
         android:hint="000000"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@id/start" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipsGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-
-        app:layout_constraintStart_toStartOf="@id/textView6"
-        app:layout_constraintTop_toBottomOf="@id/textView6">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/winter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Зима"
-            app:chipIcon="@drawable/ic_snow_24" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/summer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Лето"
-            app:chipIcon="@drawable/ic_sun_24" />
-    </com.google.android.material.chip.ChipGroup>
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/winterTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="ЗимаTest"
-        style="@style/Widget.AppTheme.MyChips"
-        app:chipIcon="@drawable/ic_snow_24"
-        app:layout_constraintStart_toStartOf="@id/chipsGroup"
-        app:layout_constraintTop_toBottomOf="@id/chipsGroup" />
 </androidx.constraintlayout.widget.ConstraintLayout>

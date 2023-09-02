@@ -64,8 +64,9 @@ class LutViewHolder(
             titleView.text = lut.month
             textView.text = "Пробег на начало месяца: ${lut.startingMileage}"
             textView2.text = "Пробег на конец месяца: ${lut.endMileage}"
-            remaining.text = "Остакток в баке: ${lut.residueLitres}"
-                textView3.text = "Заправлено литров: ${lut.litresTotal}"
+            remaining.text = "Остакток в баке на начло месяца: ${lut.residueLitres}"
+            remainingEnd.text = "Остакток на конец месяца: ${666}"
+            textView3.text = "Заправлено литров: ${lut.litresTotal}"
             mileagePeriod.mileagePeriod(lut)
             textView4.switchColor(lut)
             showLitersList.setOnClickListener {

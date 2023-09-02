@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,6 +25,7 @@ import com.kevkhv.fuellist.databinding.FragmentFeedBinding
 import com.kevkhv.fuellist.dto.Liters
 import com.kevkhv.fuellist.dto.Lut
 import com.kevkhv.fuellist.viewModel.ViewModel
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -136,7 +138,7 @@ class FeedFragment : Fragment() {
 
     }
 
-    private fun showStartDialog(editedLut: Lut?, startingMileage: Int?) {
+    private fun showStartDialog(editedLut: Lut?, lastLut: Lut?) {
 
         val builder = AlertDialog.Builder(activity)
         val dialogLayout = layoutInflater.inflate(R.layout.dialog_start, null)
@@ -146,7 +148,9 @@ class FeedFragment : Fragment() {
         (monthView.editText as? AutoCompleteTextView)?.setAdapter(adapter)
         val startingMileageView = dialogLayout.findViewById<EditText>(R.id.start)
         val litresView = dialogLayout.findViewById<EditText>(R.id.litres)
-        val chipWinterTest = dialogLayout.findViewById<Chip>(R.id.winterTest)
+
+      //  val chipWinterTest = dialogLayout.findViewById<Chip>(R.id.winterTest)
+        val textForLiters = dialogLayout.findViewById<TextView>(R.id.textView6)
 
 
         editedLut?.let {
@@ -155,18 +159,16 @@ class FeedFragment : Fragment() {
             litresView.setText(it.residueLitres.toString())
         }
 
-        startingMileage?.let {
-            startingMileageView.setText(startingMileage.toString())
+        lastLut?.let {
+            startingMileageView.setText(lastLut.residueLitres.toString())
+           //TODO insert here data from last lut about total remp liters before insert in data base new colum
         }
 
 
-        chipWinterTest.setOnClickListener {
-            var test = chipWinterTest.isChecked
-            Log.d("isChecked", test.toString())
-
-
-
-        }
+//        chipWinterTest.setOnClickListener {
+//            var test = chipWinterTest.isChecked
+//            Log.d("isChecked", test.toString())
+//        }
 
 
 
