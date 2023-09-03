@@ -17,7 +17,8 @@ private val empty = Lut(
     litresTotal = 0,
     residueLitres = 0,
     startingMileage = 0,
-    endMileage = 0
+    endMileage = 0,
+    endMonthLiters = 0
 )
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
@@ -53,13 +54,17 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return repository.getLitersListFromDb(id)
     }
 
-    fun addEndMileage(lutId: Int, endMileage: Int) = repository.updateEndMileage(lutId,endMileage)
+    fun addEndMileage(lutId: Int, endMileage: Int) = repository.updateEndMileage(lutId, endMileage)
 
     fun resetEditLut() {
         editedLut.value = null
     }
-    fun getLastLutFromD():Lut{
+
+    fun getLastLutFromD(): Lut {
         return repository.getLastLutFromDb()
     }
+
+    fun addEndMonthLiters(lutId: Int, endMonthLiters: Int) =
+        repository.updateEntMonthLiters(lutId, endMonthLiters)
 
 }

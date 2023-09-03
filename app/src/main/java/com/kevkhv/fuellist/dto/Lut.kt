@@ -6,7 +6,8 @@ data class Lut(
     val id: Int,
     val month: String,
     val litresTotal: Int,
-    val residueLitres:Int,
+    val residueLitres: Int,
+    val endMonthLiters: Int,
     val startingMileage: Int,
-    val endMileage:Int
+    val endMileage: Int
 )

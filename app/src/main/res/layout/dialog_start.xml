@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Остаток топлива в баке:"
+        android:text="Остаток в баке на начало месяца:"
         app:layout_constraintBottom_toBottomOf="@id/litres"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/litres" />

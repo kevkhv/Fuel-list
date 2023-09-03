@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.AbsListView.OnScrollListener
 import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +23,9 @@ interface LutInteractionListener {
     fun showAddFuelDialog(lutId: Int)
     fun showBottomSheetWithLiters(lutId: Int)
     fun showAddMileageDialog(lut: Lut)
+    fun showAddEndMonthLitersDialog(lut: Lut)
     fun onClickRoot()
+
 
 }
 
@@ -80,6 +84,10 @@ class LutViewHolder(
 
             textView2.setOnClickListener {
                 onInteractionListener.showAddMileageDialog(lut)
+            }
+
+            remainingEnd.setOnClickListener {
+               onInteractionListener.showAddEndMonthLitersDialog(lut)
             }
 
 

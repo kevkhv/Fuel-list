@@ -97,6 +97,33 @@ class FeedFragment : Fragment() {
             }
         }
 
+        override fun showAddEndMonthLitersDialog(lut: Lut) {
+            val builder = AlertDialog.Builder(activity)
+            val dialogLayout = layoutInflater.inflate(R.layout.dialog_add_end_mileage, null)
+            val endMonthLitersView = dialogLayout.findViewById<EditText>(R.id.endMileage)
+
+
+            with(builder) {
+                setTitle("Остакток в баке")
+
+                setMessage(resources.getString(R.string.endLiters))
+
+                setNegativeButton("Отмена") { dialog, which ->
+                    // Respond to negative button press
+                }
+                setPositiveButton("Ок") { dialog, which ->
+                    viewModel.addEndMonthLiters(
+                        lut.id,
+                        Integer.parseInt(endMonthLitersView.text.toString())
+                    )
+                    Log.d("SAVVE", "SAVE")
+                }
+                setView(dialogLayout)
+                    .show()
+            }
+
+        }
+
         override fun onClickRoot() {
             Log.d("ebat", "i click root")
         }
@@ -149,7 +176,7 @@ class FeedFragment : Fragment() {
         val startingMileageView = dialogLayout.findViewById<EditText>(R.id.start)
         val litresView = dialogLayout.findViewById<EditText>(R.id.litres)
 
-      //  val chipWinterTest = dialogLayout.findViewById<Chip>(R.id.winterTest)
+        //  val chipWinterTest = dialogLayout.findViewById<Chip>(R.id.winterTest)
         val textForLiters = dialogLayout.findViewById<TextView>(R.id.textView6)
 
 
@@ -160,8 +187,10 @@ class FeedFragment : Fragment() {
         }
 
         lastLut?.let {
-            startingMileageView.setText(lastLut.residueLitres.toString())
-           //TODO insert here data from last lut about total remp liters before insert in data base new colum
+            startingMileageView.setText(lastLut.endMileage.toString())
+            litresView.setText(lastLut.endMonthLiters.toString())
+
+            //TODO insert here data from last lut about total remp liters before insert in data base new colum
         }
 
 
@@ -169,7 +198,6 @@ class FeedFragment : Fragment() {
 //            var test = chipWinterTest.isChecked
 //            Log.d("isChecked", test.toString())
 //        }
-
 
 
         with(builder) {
@@ -182,7 +210,8 @@ class FeedFragment : Fragment() {
                         litresTotal = 0,
                         residueLitres = Integer.parseInt(litresView.text.toString()),
                         startingMileage = Integer.parseInt(startingMileageView.text.toString()),
-                        endMileage = 0
+                        endMileage = 0,
+                        endMonthLiters = 0
                     )
                 )
             }

@@ -13,6 +13,7 @@ interface LutRepository {
     fun getLitersListFromDb(id: Int): LiveData<List<Liters>>
     fun updateEndMileage(lutId: Int, endMileage: Int)
     fun getLastLutFromDb():Lut
+    fun updateEntMonthLiters(lutId: Int,endMonthLiters:Int)
 
 
 }
