@@ -69,7 +69,7 @@ class LutViewHolder(
             textView.text = "Пробег на начало месяца: ${lut.startingMileage}"
             textView2.text = "Пробег на конец месяца: ${lut.endMileage}"
             remaining.text = "Остакток в баке на начло месяца: ${lut.residueLitres}"
-            remainingEnd.text = "Остакток на конец месяца: ${666}"
+            remainingEnd.text = "Остакток на конец месяца: ${lut.endMonthLiters}"
             textView3.text = "Заправлено литров: ${lut.litresTotal}"
             mileagePeriod.mileagePeriod(lut)
             textView4.switchColor(lut)
@@ -87,7 +87,7 @@ class LutViewHolder(
             }
 
             remainingEnd.setOnClickListener {
-               onInteractionListener.showAddEndMonthLitersDialog(lut)
+                onInteractionListener.showAddEndMonthLitersDialog(lut)
             }
 
 
@@ -118,16 +118,23 @@ class LutViewHolder(
     private fun TextView.switchColor(lut: Lut) {
 
         if (lut.endMileage > 0 && lut.litresTotal > 0) {
-            val standart =
+            val standart:Double =
 
 
-                (lut.litresTotal + lut.residueLitres) * 100 / (lut.endMileage - lut.startingMileage).toDouble()
-            text = "Расчет расхода:  ${roundDouble(standart)}"
-            setTextColor(
-                if (standart < 12) resources.getColor(R.color.green) else resources.getColor(
-                    R.color.red
-                )
-            )
+                (lut.litresTotal - (lut.endMonthLiters- lut.residueLitres)) * 100 / (lut.endMileage - lut.startingMileage).toDouble()
+            text = "Расчет расхода: ${roundDouble(standart)}"
+
+
+//                (lut.litresTotal + lut.residueLitres) * 100 / (lut.endMileage - lut.startingMileage).toDouble()
+//            text = "Расчет расхода:  ${roundDouble(standart)}"
+
+
+            //TODO i don't know winter limit, i will write this code later
+//            setTextColor(
+//                if (standart < 12) resources.getColor(R.color.green) else resources.getColor(
+//                    R.color.red
+//                )
+//            )
         } else {
             text = "Расчет расхода:  N/A"
 
