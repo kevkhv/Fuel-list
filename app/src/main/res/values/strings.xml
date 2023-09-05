@@ -20,6 +20,9 @@
     <string name="remaining">Остакток в баке на начало месяца</string>
     <string name="remainingEnd">Остакток в баке на конец месяца</string>
     <string name="endLiters">Введите остаток в баке на конец мсяца:</string>
+    <string name="allFields">Все поля должны быть заполнены</string>
+    <string name="notEmpty">Поле не может быть пустым </string>
+
 
 
 

@@ -38,7 +38,7 @@ interface LutDao {
     @Query("DELETE FROM lutsTable WHERE id = :id")
     fun removeById(id: Int)
 
-    @Query("UPDATE lutsTable SET litresTotal = (SELECT SUM(liters_count) FROM liters_table WHERE lut_id=:id) ")
+    @Query("UPDATE lutsTable SET litresTotal = (SELECT SUM(liters_count) FROM liters_table WHERE lut_id=:id) WHERE id =:id ")
     fun updateAllLiters(id: Int)
 
     @Query("UPDATE lutsTable SET endMileage =:endMileage WHERE id =:lutId")

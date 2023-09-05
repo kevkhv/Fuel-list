@@ -6,26 +6,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.kevkhv.fuellist.R
-import com.kevkhv.fuellist.adapter.*
+import com.kevkhv.fuellist.adapter.LitersAdapter
+import com.kevkhv.fuellist.adapter.LitersInteractionListener
+import com.kevkhv.fuellist.adapter.LutAdapter
+import com.kevkhv.fuellist.adapter.LutInteractionListener
 import com.kevkhv.fuellist.databinding.FragmentFeedBinding
 import com.kevkhv.fuellist.dto.Liters
 import com.kevkhv.fuellist.dto.Lut
 import com.kevkhv.fuellist.viewModel.ViewModel
-import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -90,7 +85,15 @@ class FeedFragment : Fragment() {
                     // Respond to negative button press
                 }
                 setPositiveButton("Ок") { dialog, which ->
-                    viewModel.addEndMileage(lut.id, Integer.parseInt(endMileage.text.toString()))
+                    if (endMileage.text.isEmpty()) {
+                        Toast.makeText(requireContext(), R.string.notEmpty, 20).show()
+                        showAddMileageDialog(lut)
+                    } else {
+                        viewModel.addEndMileage(
+                            lut.id,
+                            Integer.parseInt(endMileage.text.toString())
+                        )
+                    }
                 }
                 setView(dialogLayout)
                     .show()
@@ -104,19 +107,23 @@ class FeedFragment : Fragment() {
 
 
             with(builder) {
+
                 setTitle("Остакток в баке")
-
                 setMessage(resources.getString(R.string.endLiters))
-
                 setNegativeButton("Отмена") { dialog, which ->
                     // Respond to negative button press
                 }
+
                 setPositiveButton("Ок") { dialog, which ->
-                    viewModel.addEndMonthLiters(
-                        lut.id,
-                        Integer.parseInt(endMonthLitersView.text.toString())
-                    )
-                    Log.d("SAVVE", "SAVE")
+                    if (endMonthLitersView.text.isEmpty()) {
+                        Toast.makeText(requireContext(), R.string.notEmpty, 20).show()
+                        showAddEndMonthLitersDialog(lut)
+                    } else {
+                        viewModel.addEndMonthLiters(
+                            lut.id,
+                            Integer.parseInt(endMonthLitersView.text.toString())
+                        )
+                    }
                 }
                 setView(dialogLayout)
                     .show()
@@ -151,12 +158,6 @@ class FeedFragment : Fragment() {
             it?.let { showStartDialog(it, null) }
         }
 
-        binding.listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-        }
-        )
-
-        // binding.root.setOnClickListener { Log.d("ebat", "i click root") }
         binding.extendedFab.setOnClickListener {
             showStartDialog(null, viewModel.getLastLutFromD())
         }
@@ -176,10 +177,6 @@ class FeedFragment : Fragment() {
         val startingMileageView = dialogLayout.findViewById<EditText>(R.id.start)
         val litresView = dialogLayout.findViewById<EditText>(R.id.litres)
 
-        //  val chipWinterTest = dialogLayout.findViewById<Chip>(R.id.winterTest)
-        val textForLiters = dialogLayout.findViewById<TextView>(R.id.textView6)
-
-
         editedLut?.let {
             monthView.editText?.setText(it.month)
             startingMileageView.setText(it.startingMileage.toString())
@@ -189,36 +186,33 @@ class FeedFragment : Fragment() {
         lastLut?.let {
             startingMileageView.setText(lastLut.endMileage.toString())
             litresView.setText(lastLut.endMonthLiters.toString())
-
-            //TODO insert here data from last lut about total remp liters before insert in data base new colum
         }
 
-
-//        chipWinterTest.setOnClickListener {
-//            var test = chipWinterTest.isChecked
-//            Log.d("isChecked", test.toString())
-//        }
-
-
         with(builder) {
-
             setPositiveButton("Ок") { dialog, which ->
-                viewModel.save(
-                    Lut(
-                        id = editedLut?.id ?: 0,
-                        month = monthView.editText?.text.toString(),
-                        litresTotal = 0,
-                        residueLitres = Integer.parseInt(litresView.text.toString()),
-                        startingMileage = Integer.parseInt(startingMileageView.text.toString()),
-                        endMileage = 0,
-                        endMonthLiters = 0
+                if (startingMileageView.text.isEmpty() || litresView.text.isEmpty() || monthView.editText?.text?.isEmpty() == true) {
+                    Toast.makeText(requireContext(), R.string.allFields, 20).show()
+                    showStartDialog(editedLut, lastLut)
+                } else {
+                    viewModel.save(
+                        Lut(
+                            id = editedLut?.id ?: 0,
+                            month = monthView.editText?.text.toString(),
+                            litresTotal = 0,
+                            residueLitres = Integer.parseInt(litresView.text.toString()),
+                            startingMileage = Integer.parseInt(startingMileageView.text.toString()),
+                            endMileage = 0,
+                            endMonthLiters = 0
+                        )
                     )
-                )
+                }
             }
+
             setOnCancelListener { viewModel.resetEditLut() }
             setView(dialogLayout)
             show()
         }
+
 
     }
 

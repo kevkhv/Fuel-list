@@ -68,7 +68,7 @@ class LutViewHolder(
             titleView.text = lut.month
             textView.text = "Пробег на начало месяца: ${lut.startingMileage}"
             textView2.text = "Пробег на конец месяца: ${lut.endMileage}"
-            remaining.text = "Остакток в баке на начло месяца: ${lut.residueLitres}"
+            //remaining.text = "Остакток в баке на начло месяца: ${lut.residueLitres}"
             remainingEnd.text = "Остакток на конец месяца: ${lut.endMonthLiters}"
             textView3.text = "Заправлено литров: ${lut.litresTotal}"
             mileagePeriod.mileagePeriod(lut)
@@ -122,7 +122,7 @@ class LutViewHolder(
 
 
                 (lut.litresTotal - (lut.endMonthLiters- lut.residueLitres)) * 100 / (lut.endMileage - lut.startingMileage).toDouble()
-            text = "Расчет расхода: ${roundDouble(standart)}"
+            text = "Расчет расхода: ${String.format("%.3f", standart)}"
 
 
 //                (lut.litresTotal + lut.residueLitres) * 100 / (lut.endMileage - lut.startingMileage).toDouble()
