@@ -1,6 +1,7 @@
 package com.kevkhv.fuellist.repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.kevkhv.fuellist.dto.Liters
@@ -52,5 +53,14 @@ class LutRepositoryImpl(
     override fun updateEntMonthLiters(lutId: Int, endMonthLiters: Int) =
         dao.updateEndMonthLiters(lutId, endMonthLiters)
 
+    override fun removeLitersById(liters: Liters) {
+        litersDao.removeLitersById(liters.id)
+        if (checkNullLitersList(liters.lutId)!=0)dao.updateAllLiters(liters.lutId)
+        else dao.updateTotalLitersIfListNulll(liters.lutId,0)
+    }
+
+    private fun checkNullLitersList(litersId: Int): Int {
+        return litersDao.checkNullLitersList(litersId)
+    }
 
 }

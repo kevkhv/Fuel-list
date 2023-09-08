@@ -14,6 +14,7 @@ interface LutRepository {
     fun updateEndMileage(lutId: Int, endMileage: Int)
     fun getLastLutFromDb():Lut
     fun updateEntMonthLiters(lutId: Int,endMonthLiters:Int)
+    fun removeLitersById(liters: Liters)
 
 
 }

@@ -67,4 +67,10 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     fun addEndMonthLiters(lutId: Int, endMonthLiters: Int) =
         repository.updateEntMonthLiters(lutId, endMonthLiters)
 
+    fun removeLiters(liters: Liters){
+       repository.removeLitersById(liters)
+
+
+    }
+
 }

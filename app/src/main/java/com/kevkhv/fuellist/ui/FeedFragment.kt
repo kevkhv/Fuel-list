@@ -229,7 +229,8 @@ class FeedFragment : Fragment() {
             }
 
             override fun onLitersRemoveClicked(liters: Liters) {
-                TODO("Not yet implemented")
+                viewModel.removeLiters(liters)
+                    dialog.hide()
             }
         })
 

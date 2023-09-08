@@ -49,4 +49,7 @@ interface LutDao {
 
     @Query("UPDATE lutsTable SET endMonthLiters=:endMonthLiters WHERE id=:lutId")
     fun updateEndMonthLiters(lutId: Int, endMonthLiters: Int)
+
+    @Query("UPDATE lutsTable SET litresTotal=:litersTotal WHERE id=:lutId")
+    fun updateTotalLitersIfListNulll(lutId: Int, litersTotal: Int)
 }

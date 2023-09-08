@@ -65,6 +65,8 @@ class LitersViewHolder(
                         when (it.itemId) {
                             R.id.remove -> {
                                 Log.d("click", "you click del")
+                                onInteractionListener.onLitersRemoveClicked(liters)
+                                Log.d("click", liters.id.toString())
                                 //TODO Confirmation remove
                                 true
                             }

@@ -13,4 +13,10 @@ interface LitersDao {
 
     @Query("SELECT * FROM liters_table WHERE lut_id =:id")
     fun getLitersList(id: Int): LiveData<List<LitersEntity>>
+
+    @Query("DELETE FROM liters_table WHERE id = :litersId")
+    fun removeLitersById(litersId: Int)
+
+    @Query("SELECT COUNT(*) FROM liters_table WHERE lut_id =:id")
+    fun checkNullLitersList(id: Int): Int
 }
