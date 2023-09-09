@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:clickable="true"
-    app:cardElevation="24dp"
-    app:cardCornerRadius="16dp">
-
-    <LinearLayout
+    app:cardCornerRadius="16dp"
+    app:cardElevation="24dp">
+    
+    
+    
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/mainColor">
+
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+
             android:id="@+id/headerConstraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,11 +45,12 @@
 
             <TextView
                 android:id="@+id/titleView"
+                android:textColor="@color/mainColor2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
-                android:textSize="18sp"
                 android:text="Месяц"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/menuButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,70 +72,163 @@
                 android:backgroundTint="@color/white"
                 android:src="@drawable/ic_baseline_local_gas_station_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintEnd_toStartOf="@id/menuButton"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintEnd_toStartOf="@id/menuButton"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+        
+        
+        
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
+                android:layout_marginStart="12dp"
+
+                android:text="Пробег на начало месяца:"
+                 />
+
+            <TextView
+                android:id="@+id/startMileageValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
+                android:layout_marginStart="6dp"
+                android:text="123443" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Пробег на конец месяца:"
+                android:textColor="@color/mainTextColor" />
+
+            <TextView
+                android:id="@+id/endMileageValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="124500:"
+                android:textColor="@color/mainTextColor" />
+            
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/barrierLine"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:orientation="horizontal"
-            android:background="@color/black"
-            android:layout_marginTop="4dp"
+            android:layout_width="1dp"
+            android:layout_height="12dp"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Пробег на начало периода:"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/textView2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Пробег на конец периода:"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/mainColor2"
+            android:orientation="vertical" />
+
+
+        <TextView
+            android:id="@+id/mileagePeriod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/mileagePeriod"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/remaining"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="12dp"-->
+<!--            android:layout_marginTop="4dp"-->
+<!--            android:text="@string/remaining"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/textView"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <TextView
+            android:id="@+id/remainingEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/remainingEnd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Заправлено литров:"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:text="Заправлено литров:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:textStyle="bold"
+            android:text="Расход:"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/showLitersList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Расход:"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="Показать список заправок"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="4dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+
+
+
+
+</LinearLayout>
+
+    </androidx.cardview.widget.CardView>

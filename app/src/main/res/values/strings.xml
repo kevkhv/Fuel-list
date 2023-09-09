@@ -14,6 +14,18 @@
     <string name="month_october">Октябрь</string>
     <string name="month_november">Ноябрь</string>
     <string name="month_december">Декабрь</string>
-    <string name="month">Месяц</string>
+    <string name="month">Месяц</string>\
+    <string name="endMil">Введите пробег на конец месяца:</string>
+    <string name="mileagePeriod">Пробег за месяц:</string>
+    <string name="remaining">Остакток в баке на начало месяца</string>
+    <string name="remainingEnd">Остакток в баке на конец месяца</string>
+    <string name="endLiters">Введите остаток в баке на конец мсяца:</string>
+    <string name="allFields">Все поля должны быть заполнены</string>
+    <string name="notEmpty">Поле не может быть пустым </string>
+
+
+
+
+
 
 </resources>

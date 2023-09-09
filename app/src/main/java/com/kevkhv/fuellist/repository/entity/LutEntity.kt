@@ -1,4 +1,4 @@
-package com.kevkhv.fuellist.entity
+package com.kevkhv.fuellist.repository.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -12,9 +12,10 @@ class LutEntity(
     val id: Int,
     val month: String,
     val litresTotal: Int,
-    val residueLitres:Int,
+    val residueLitres: Int,
     val startingMileage: Int,
-    val endMileage: Int
+    val endMileage: Int,
+    val endMonthLiters: Int
 ) {
 
 
@@ -25,7 +26,9 @@ class LutEntity(
             litresTotal = litresTotal,
             residueLitres = residueLitres,
             startingMileage = startingMileage,
-            endMileage = endMileage
+            endMileage = endMileage,
+            endMonthLiters = endMonthLiters
+
         )
 
         internal fun Lut.toEntity() = LutEntity(
@@ -34,7 +37,8 @@ class LutEntity(
             litresTotal = litresTotal,
             residueLitres = residueLitres,
             startingMileage = startingMileage,
-            endMileage = endMileage
+            endMileage = endMileage,
+            endMonthLiters = endMonthLiters
         )
     }
 }
