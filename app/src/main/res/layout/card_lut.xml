@@ -8,13 +8,35 @@
     android:clickable="true"
     app:cardCornerRadius="16dp"
     app:cardElevation="24dp">
-
-    <LinearLayout
+    
+    
+    
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/mainColor">
+
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+
             android:id="@+id/headerConstraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,6 +45,7 @@
 
             <TextView
                 android:id="@+id/titleView"
+                android:textColor="@color/mainColor2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
@@ -52,40 +75,71 @@
                 app:layout_constraintEnd_toStartOf="@id/menuButton"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+        
+        
+        
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
+                android:layout_marginStart="12dp"
+
+                android:text="Пробег на начало месяца:"
+                 />
+
+            <TextView
+                android:id="@+id/startMileageValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
+                android:layout_marginStart="6dp"
+                android:text="123443" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Пробег на конец месяца:"
+                android:textColor="@color/mainTextColor" />
+
+            <TextView
+                android:id="@+id/endMileageValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="124500:"
+                android:textColor="@color/mainTextColor" />
+            
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/barrierLine"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_width="1dp"
+            android:layout_height="12dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:background="@color/black"
-            android:orientation="horizontal" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:text="Пробег на начало месяца:"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/textView2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="4dp"
-            android:text="Пробег на конец месяца:"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@color/mainColor2"
+            android:orientation="vertical" />
 
 
         <TextView
